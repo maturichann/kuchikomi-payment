@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# 口コミアシスト 決済サイト
 
-## Getting Started
+口コミアシストツールの初期費用（33,000円税込）を決済するためのサイトです。
+A代理店とB代理店それぞれに専用の決済ページがあり、決済完了後は各代理店の登録画面に自動的に遷移します。
 
-First, run the development server:
+## 機能
+
+- A代理店専用決済ページ: `/payment/agency-a`
+- B代理店専用決済ページ: `/payment/agency-b`
+- Stripe Checkoutによる安全な決済処理
+- 決済完了後に代理店ごとの登録URLへ自動遷移
+
+## セットアップ
+
+1. 依存パッケージのインストール
+
+```bash
+npm install
+```
+
+2. 環境変数の設定
+
+`.env.local`ファイルを作成し、以下の環境変数を設定してください：
+
+```env
+# Stripe API Keys（StripeダッシュボードのAPI keysから取得）
+NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_test_xxxxx
+STRIPE_SECRET_KEY=sk_test_xxxxx
+
+# 代理店登録URL（決済成功後の遷移先）
+AGENCY_A_REGISTRATION_URL=https://your-domain.com/agency-a/register
+AGENCY_B_REGISTRATION_URL=https://your-domain.com/agency-b/register
+
+# アプリケーションURL
+NEXT_PUBLIC_APP_URL=http://localhost:5648
+```
+
+3. 開発サーバーの起動
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+サーバーは http://localhost:5648 で起動します。
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## ページURL
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+- A代理店: http://localhost:5648/payment/agency-a
+- B代理店: http://localhost:5648/payment/agency-b
 
-## Learn More
+## デプロイ（Vercel）
 
-To learn more about Next.js, take a look at the following resources:
+1. GitHubにプッシュ
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+```bash
+git add .
+git commit -m "Initial commit"
+git push
+```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+2. Vercelでプロジェクトをインポート
 
-## Deploy on Vercel
+3. 環境変数を設定
+   - Vercelのダッシュボードで以下の環境変数を設定してください
+   - `NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY`
+   - `STRIPE_SECRET_KEY`
+   - `AGENCY_A_REGISTRATION_URL`
+   - `AGENCY_B_REGISTRATION_URL`
+   - `NEXT_PUBLIC_APP_URL`（本番URLに変更）
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+4. デプロイ
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Stripeのテスト
+
+テストモードでは以下のカード番号が使用できます：
+
+- カード番号: `4242 4242 4242 4242`
+- 有効期限: 未来の任意の日付
+- CVC: 任意の3桁の数字
+
+## 技術スタック
+
+- Next.js 16 (App Router)
+- TypeScript
+- Tailwind CSS
+- Stripe Checkout
