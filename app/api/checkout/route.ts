@@ -2,14 +2,35 @@ import { NextRequest, NextResponse } from 'next/server';
 import Stripe from 'stripe';
 
 function getStripe() {
-  return new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  const secretKey = process.env.STRIPE_SECRET_KEY;
+  if (!secretKey) {
+    throw new Error('STRIPE_SECRET_KEY is not set');
+  }
+  return new Stripe(secretKey, {
     apiVersion: '2025-11-17.clover',
   });
 }
 
 export async function POST(request: NextRequest) {
-  const stripe = getStripe();
   try {
+    // 環境変数のチェック
+    if (!process.env.STRIPE_SECRET_KEY) {
+      console.error('STRIPE_SECRET_KEY is not configured');
+      return NextResponse.json(
+        { error: 'サーバー設定エラー: Stripe APIキーが設定されていません' },
+        { status: 500 }
+      );
+    }
+
+    if (!process.env.AGENCY_A_REGISTRATION_URL || !process.env.AGENCY_B_REGISTRATION_URL) {
+      console.error('Agency registration URLs are not configured');
+      return NextResponse.json(
+        { error: 'サーバー設定エラー: 代理店URLが設定されていません' },
+        { status: 500 }
+      );
+    }
+
+    const stripe = getStripe();
     const { agency } = await request.json();
 
     if (!agency || !['a', 'b'].includes(agency)) {
@@ -24,6 +45,12 @@ export async function POST(request: NextRequest) {
       : process.env.AGENCY_B_REGISTRATION_URL;
 
     const cancelUrl = `${process.env.NEXT_PUBLIC_APP_URL}/payment/agency-${agency}`;
+
+    console.log('Creating Stripe session with:', {
+      agency,
+      successUrl,
+      cancelUrl,
+    });
 
     const session = await stripe.checkout.sessions.create({
       payment_method_types: ['card'],
@@ -48,11 +75,21 @@ export async function POST(request: NextRequest) {
       },
     });
 
+    console.log('Stripe session created successfully:', session.id);
     return NextResponse.json({ url: session.url });
   } catch (error) {
-    console.error('Stripe error:', error);
+    console.error('Stripe error details:', error);
+
+    // Stripeエラーの詳細を返す
+    if (error instanceof Stripe.errors.StripeError) {
+      return NextResponse.json(
+        { error: `Stripeエラー: ${error.message}` },
+        { status: 500 }
+      );
+    }
+
     return NextResponse.json(
-      { error: '決済セッションの作成に失敗しました' },
+      { error: error instanceof Error ? error.message : '決済セッションの作成に失敗しました' },
       { status: 500 }
     );
   }

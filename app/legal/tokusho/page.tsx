@@ -20,14 +20,15 @@ export default function TokushoPage() {
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">所在地</h2>
             <p className="text-gray-700">
-              〒000-0000<br />
-              住所を記載してください
+              〒543-0072<br />
+              大阪府大阪市天王寺区生玉前町5-19<br />
+              JPレジデンス大阪上町台 601号室
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">電話番号</h2>
-            <p className="text-gray-700">000-0000-0000</p>
+            <p className="text-gray-700">070-8972-2988</p>
           </section>
 
           <section>
