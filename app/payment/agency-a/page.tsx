@@ -1,12 +1,15 @@
 'use client';
 
 import { useState } from 'react';
+import Link from 'next/link';
 
 export default function AgencyAPaymentPage() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
 
   const handleCheckout = async () => {
     setLoading(true);
+    setError('');
     try {
       const response = await fetch('/api/checkout', {
         method: 'POST',
@@ -18,23 +21,30 @@ export default function AgencyAPaymentPage() {
         }),
       });
 
-      const { url } = await response.json();
+      const data = await response.json();
 
-      if (url) {
-        window.location.href = url;
+      if (!response.ok) {
+        throw new Error(data.error || '決済セッションの作成に失敗しました');
+      }
+
+      if (data.url) {
+        window.location.href = data.url;
+      } else {
+        throw new Error('決済URLが取得できませんでした');
       }
     } catch (error) {
       console.error('Error:', error);
+      setError(error instanceof Error ? error.message : 'エラーが発生しました');
       setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-4">
+    <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex flex-col items-center justify-center p-4">
       <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full">
         <div className="text-center mb-8">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">口コミアシスト</h1>
-          <p className="text-gray-600">A代理店様専用</p>
+          <p className="text-gray-600">初期費用のお支払い</p>
         </div>
 
         <div className="bg-blue-50 rounded-xl p-6 mb-6">
@@ -66,6 +76,12 @@ export default function AgencyAPaymentPage() {
           </div>
         </div>
 
+        {error && (
+          <div className="bg-red-50 border border-red-200 text-red-700 px-4 py-3 rounded-lg mb-4">
+            {error}
+          </div>
+        )}
+
         <button
           onClick={handleCheckout}
           disabled={loading}
@@ -78,6 +94,18 @@ export default function AgencyAPaymentPage() {
           Stripeの安全な決済システムを使用しています
         </p>
       </div>
+
+      <footer className="mt-8 text-center">
+        <div className="flex gap-6 justify-center text-sm text-gray-600">
+          <Link href="/legal/tokusho" className="hover:text-blue-600 underline">
+            特定商取引法に基づく表記
+          </Link>
+          <Link href="/legal/privacy" className="hover:text-blue-600 underline">
+            プライバシーポリシー
+          </Link>
+        </div>
+        <p className="text-xs text-gray-500 mt-2">© 2024 シンパートナーズ</p>
+      </footer>
     </div>
   );
 }
