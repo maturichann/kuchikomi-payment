@@ -100,7 +100,7 @@ export default function PrivacyPage() {
               事業者名: シンパートナーズ<br />
               所在地: 〒543-0072 大阪府大阪市天王寺区生玉前町5-19 JPレジデンス大阪上町台 601号室<br />
               電話番号: 070-8972-2988<br />
-              メールアドレス: info@example.com
+              メールアドレス: shinpartners.group@shin-partners.com
             </p>
           </section>
 

@@ -33,7 +33,7 @@ export default function TokushoPage() {
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">メールアドレス</h2>
-            <p className="text-gray-700">info@example.com</p>
+            <p className="text-gray-700">shinpartners.group@shin-partners.com</p>
           </section>
 
           <section>
@@ -68,7 +68,8 @@ export default function TokushoPage() {
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">商品の引渡時期</h2>
             <p className="text-gray-700">
-              決済完了後、直ちにサービスをご利用いただけます
+              初期費用の決済完了後、代理店の登録画面に遷移します。<br />
+              サービスのご利用には、別途月額プランの決済が必要となります。
             </p>
           </section>
 
