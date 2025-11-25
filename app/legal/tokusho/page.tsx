@@ -8,7 +8,7 @@ export default function TokushoPage() {
 
         <div className="space-y-6">
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">事業者名</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">法人名</h2>
             <p className="text-gray-700">
               北山　伸<br />
               シンパートナーズ
@@ -21,7 +21,7 @@ export default function TokushoPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">所在地</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">住所</h2>
             <p className="text-gray-700">
               〒543-0072<br />
               大阪府大阪市天王寺区生玉前町5-19<br />
@@ -43,7 +43,7 @@ export default function TokushoPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">販売価格</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">価格</h2>
             <p className="text-gray-700">
               33,000円（税込）<br />
               <span className="text-sm text-gray-600">※各商品ページに記載された金額</span>
@@ -51,9 +51,10 @@ export default function TokushoPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">商品代金以外の必要料金</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">追加手数料</h2>
             <p className="text-gray-700">
-              インターネット接続料金、通信費等は、お客様のご負担となります。
+              なし<br />
+              <span className="text-sm text-gray-600">※インターネット接続料金、通信費等は、お客様のご負担となります</span>
             </p>
           </section>
 
@@ -72,21 +73,21 @@ export default function TokushoPage() {
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">商品の引渡時期</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">配達時間</h2>
             <p className="text-gray-700">
-              初期費用の決済完了後、代理店の登録画面に遷移します。<br />
+              初期費用の決済完了後、ただちに代理店の登録画面に遷移します。<br />
               サービスのご利用には、別途月額プランの決済が必要となります。
             </p>
           </section>
 
           <section>
-            <h2 className="text-lg font-semibold text-gray-900 mb-2">返品・キャンセル・交換について</h2>
+            <h2 className="text-lg font-semibold text-gray-900 mb-2">交換および返品に関するポリシー</h2>
             <p className="text-gray-700">
-              <strong>＜通常の返品・キャンセル＞</strong><br />
-              デジタルコンテンツの性質上、決済完了後の返品・返金・キャンセルには応じかねます。<br />
+              <strong>＜顧客からの返品・交換＞</strong><br />
+              デジタルサービスの性質上、決済完了後の返品・返金・キャンセルには応じかねます。<br />
               <br />
-              <strong>＜不良品・サービス不具合の場合＞</strong><br />
-              サービスに不具合がある場合は、メールアドレス（shinpartners.group@shin-partners.com）までお問い合わせください。<br />
+              <strong>＜不良品・サービスの返品・交換＞</strong><br />
+              サービスに不具合がある場合は、メールアドレス（shinpartners.group@shin-partners.com）または電話番号（070-8972-2988）までお問い合わせください。<br />
               状況を確認の上、返金または適切な対応をさせていただきます。
             </p>
           </section>
