@@ -23,17 +23,14 @@ export default function TokushoPage() {
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">住所</h2>
             <p className="text-gray-700">
-              〒543-0072<br />
-              大阪府大阪市天王寺区生玉前町5-19<br />
-              JPレジデンス大阪上町台 601号室
+              請求があった場合には速やかに開示いたします
             </p>
           </section>
 
           <section>
             <h2 className="text-lg font-semibold text-gray-900 mb-2">電話番号</h2>
             <p className="text-gray-700">
-              070-8972-2988<br />
-              <span className="text-sm text-gray-600">※お問い合わせはメールでも承っております</span>
+              請求があった場合には速やかに開示いたします
             </p>
           </section>
 
@@ -87,7 +84,7 @@ export default function TokushoPage() {
               デジタルサービスの性質上、決済完了後の返品・返金・キャンセルには応じかねます。<br />
               <br />
               <strong>＜不良品・サービスの返品・交換＞</strong><br />
-              サービスに不具合がある場合は、メールアドレス（shinpartners.group@shin-partners.com）または電話番号（070-8972-2988）までお問い合わせください。<br />
+              サービスに不具合がある場合は、カスタマーサポート（shinpartners.group@shin-partners.com）までお問い合わせください。<br />
               状況を確認の上、返金または適切な対応をさせていただきます。
             </p>
           </section>
